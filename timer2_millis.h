@@ -13,12 +13,12 @@ ISR (TIMER2_COMP_vect){
 void init_timer2_millis(){
 	TCCR2|=(1<<CS22); //(CLK/64).
 	TCCR2|=(1<<WGM21); //autoreload.
-	TIMSK|=(1<<OCIE2);  //enable INT.
-	TIFR|=(1<<OCF2);   //clear flag
+	TIMSK=(1<<OCIE2);  //enable INT.
+	TIFR=(1<<OCF2);   //clear flag
 	TCNT2=0x00;   //initialize counter0.
 	//interupt every (1/16000000)*64*1000*(249+1) = 1ms
 	OCR2=249; // output compare register A
-	sei();
+	sei(); 
 }
 
 #else
@@ -34,6 +34,7 @@ void init_timer2_millis(){
 	TCNT2=0x00;   //initialize counter0.
 	//interupt every (1/16000000)*64*1000*(249+1) = 1ms
 	OCR2A=249; // output compare register A
-	sei();
+	sei(); 
 }
+
 #endif
